@@ -1,5 +1,5 @@
 {
-    "name": "ethercap/yii2-daf",
+    "name": "ethercap/yii2-ledap",
     "description": "",
     "keywords": ["yii2", "extension", "jquery-steps"],
     "type": "yii2-extension",
@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "ethercap\\daf\\": ["src/"]
+            "ethercap\\ledap\\": ["src/", "src/assets/"]
         }
     }
 }
