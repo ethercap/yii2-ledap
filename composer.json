@@ -1,0 +1,22 @@
+{
+    "name": "ethercap/yii2-daf",
+    "description": "",
+    "keywords": ["yii2", "extension", "jquery-steps"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "require": {
+        "npm-asset/vue": "^2.5",
+        "npm-asset/ledap": "^0.1.1"
+    },
+    "authors": [
+        {
+            "name": "lishipeng",
+            "email": "lspbupt@sina.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ethercap\\daf\\": ["src/"]
+        }
+    }
+}
