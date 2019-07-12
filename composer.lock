@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "63ce6987e214d79e9b89ab1c88ab9616",
+    "content-hash": "d8ad7b2d6517728f0118d7bb45f6fce9",
     "packages": [
         {
             "name": "npm-asset/babel--runtime",

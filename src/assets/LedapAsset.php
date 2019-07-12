@@ -7,10 +7,10 @@ use yii\web\AssetBundle;
 class LedapAsset extends AssetBundle
 {
     public $sourcePath = '@npm/ledap/dist';
-    public $css = [
+    public $js = [
         'index.js',
     ];
     public $depends = [
-        'ethercap\ledap\VueAsset',
+        '\ethercap\ledap\VueAsset',
     ];
 }

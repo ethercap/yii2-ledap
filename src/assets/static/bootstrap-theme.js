@@ -1,6 +1,6 @@
 // 本示例采用了bootstrap, 为了适应界面展示，对默认模板进行变更。如果要求不高，可以直接使用系统默认模板
 // 主题代表一个工程一整个标准的组件的主题设置，一般由UI与前端进行沟通并固化。通过主题，我们能很好地实现某个工程的组件标准化.
-window.Theme1 = window['ledap'].Theme.getInstance({
+window.Theme = window['ledap'].Theme.getInstance({
     "baseinput" : {
          inheritAttrs: false,
         template : `<component :is="tag" :class="{'has-error':showError}">
@@ -35,7 +35,7 @@ window.Theme1 = window['ledap'].Theme.getInstance({
 
 
 // 我们也可以添加自己的组件，如下我们添加了一个叫buttongroup的组件，继承自checkboxgroup
-window.Theme1.addComponent({
+window.Theme.addComponent({
     name : "buttongroup",
     template : `<component :is="tag" :class="{'has-error':showError}">
         <label v-bind="labelOptions" class="col-sm-2 control-label">{{showLabel}}</label>

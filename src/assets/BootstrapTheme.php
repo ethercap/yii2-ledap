@@ -1,6 +1,6 @@
 <?php
 
-namespace ethercap\watermark;
+namespace ethercap\ledap;
 
 use yii\web\AssetBundle;
 
@@ -15,6 +15,6 @@ class BootstrapTheme extends AssetBundle
         './static/bootstrap-theme.js',
     ];
     public $depends = [
-        'ethercap\ledap\LedapAsset',
+        '\ethercap\ledap\LedapAsset',
     ];
 }
