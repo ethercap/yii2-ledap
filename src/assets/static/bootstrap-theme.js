@@ -48,3 +48,16 @@ window.Theme.addComponent({
     </component>`,
     "depends" : ['tab', 'group'],
 }, 'checkboxgroup');
+
+window.getWebDp = function(config){
+    config = Object.assign({}, {
+        httpRequest : function(httpOptions, suc, fail){
+            axios.request(httpOptions).then(function(response) {
+                suc(response.data.data);
+            }).catch(function (error) {
+                fail(error);
+            });
+        },
+    },config);
+    return new window.ledap.WebDataProvider(config);
+}
