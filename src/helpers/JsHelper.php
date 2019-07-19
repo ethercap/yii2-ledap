@@ -13,7 +13,7 @@ class JsHelper
         $path = $base.'/'.$url.'.js';
         unset($option['url']);
         unset($option['base']);
-        empty($option['depends']) && $option['depends'] = [\ethercap\ledap\LedapAsset::className()];
+        empty($option['depends']) && $option['depends'] = [\ethercap\ledap\assets\LedapAsset::className()];
         //判断js是否存在
         $basePath = Yii::getAlias('@webroot');
         $baseUrl = Yii::getAlias('@web');
