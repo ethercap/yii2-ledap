@@ -1,6 +1,6 @@
 <?php
 
-namespace ethercap\ledap;
+namespace ethercap\ledap\assets;
 
 use yii\web\AssetBundle;
 
@@ -16,6 +16,7 @@ class BootstrapTheme extends AssetBundle
         'https://unpkg.com/axios/dist/axios.min.js',
     ];
     public $depends = [
-        '\ethercap\ledap\LedapAsset',
+        '\ethercap\ledap\assets\LedapAsset',
+        '\yii\bootstrap\BootstrapAsset',
     ];
 }

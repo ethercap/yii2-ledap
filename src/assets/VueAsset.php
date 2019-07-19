@@ -1,6 +1,6 @@
 <?php
 
-namespace ethercap\ledap;
+namespace ethercap\ledap\assets;
 
 use yii\web\AssetBundle;
 

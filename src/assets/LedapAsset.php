@@ -1,6 +1,6 @@
 <?php
 
-namespace ethercap\ledap;
+namespace ethercap\ledap\assets;
 
 use yii\web\AssetBundle;
 
@@ -11,6 +11,6 @@ class LedapAsset extends AssetBundle
         'index.js',
     ];
     public $depends = [
-        '\ethercap\ledap\VueAsset',
+        '\ethercap\ledap\assets\VueAsset',
     ];
 }
