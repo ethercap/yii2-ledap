@@ -11,9 +11,12 @@ use yii\web\AssetBundle;
 class BootstrapTheme extends AssetBundle
 {
     public $sourcePath = __DIR__;
+    public $css = [
+        './static/bootstrap-theme.css',
+    ];
     public $js = [
         './static/bootstrap-theme.js',
-        'https://unpkg.com/axios/dist/axios.min.js',
+        './static/axios.min.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',

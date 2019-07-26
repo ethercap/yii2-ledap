@@ -1,0 +1,48 @@
+<?php 
+echo "<?php\n";
+?>
+use ethercap\apiBase\components\ResBuilder;
+use yii\data\ActiveDataProvider;
+use ethercap\apiBase\widgets\ListApi;
+use ethercap\apiBase\widgets\DetailApi;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
+
+<?php if (!empty($generator->searchModelClass)): ?>
+$res->field("params")->widget(DetailApi::class, [
+    'useModelResponse' => true,
+    'model' => $searchModel,
+    'columns' => [
+<?php
+if (($tableSchema = $generator->getTableSchema()) === false) {
+    foreach ($generator->getColumnNames() as $name) {
+        echo "        '" . $name . "',\n";
+    }
+} else {
+    foreach ($generator->getTableSchema()->columns as $column) {
+        $format = $generator->generateColumnFormat($column);
+        echo "        '" . $column->name . "',\n";
+    }
+}
+?>
+    ],
+]); 
+<?php endif; ?>
+$res->data()->widget(ListApi::class, [
+    'dataProvider' => $dataProvider,
+    'columns' => [
+<?php
+if (($tableSchema = $generator->getTableSchema()) === false) {
+    foreach ($generator->getColumnNames() as $name) {
+        echo "        '" . $name . "',\n";
+    }
+} else {
+    foreach ($generator->getTableSchema()->columns as $column) {
+        $format = $generator->generateColumnFormat($column);
+        echo "        '" . $column->name . "',\n";
+    }
+}
+?>
+    ],
+]); 

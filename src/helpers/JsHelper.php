@@ -17,7 +17,10 @@ class JsHelper
         //判断js是否存在
         $basePath = Yii::getAlias('@webroot');
         $baseUrl = Yii::getAlias('@web');
-        $timestamp = @filemtime("$basePath$path");
-        $view->registerJsFile($baseUrl.$path.'?v='.$timestamp, $option, $key);
+        $filePath = $basePath.$path;
+        if (is_file($filePath)) {
+            $timestamp = @filemtime("$filePath");
+            $view->registerJsFile($baseUrl.$path.'?v='.$timestamp, $option, $key);
+        }
     }
 }

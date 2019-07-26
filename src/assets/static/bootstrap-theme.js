@@ -49,15 +49,34 @@ window.Theme.addComponent({
     "depends" : ['tab', 'group'],
 }, 'checkboxgroup');
 
-window.getWebDp = function(config){
-    config = Object.assign({}, {
-        httpRequest : function(httpOptions, suc, fail){
-            axios.request(httpOptions).then(function(response) {
-                suc(response.data.data);
-            }).catch(function (error) {
-                fail(error);
-            });
+window.ledap.getWebDp = function(config){
+    config = Object.assign({
+        httpRequest : function(httpOptions, suc, fail) {
+            ledap.request(httpOptions, suc, (data) => {
+                alert(data.message);
+                fail(data);
+            })
         },
     },config);
     return new window.ledap.WebDataProvider(config);
+}
+
+window.ledap.request = function(httpOptions, suc, fail = function(data){alert(data.message);}){
+    httpOptions = Object.assign({
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+    }, httpOptions);
+    axios.request(httpOptions).then(function(response){
+        var result = response.data; 
+        if(result.code === 0) {
+            suc(result.data);
+        }else {
+            fail(result.data);
+        }
+    }).catch(function(error){
+        fail({
+            code:1,
+            message: error.message,
+            data:error,
+        }); 
+    });
 }
