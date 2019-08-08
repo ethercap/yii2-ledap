@@ -16,7 +16,6 @@ class BootstrapTheme extends AssetBundle
     ];
     public $js = [
         './static/bootstrap-theme.js',
-        './static/axios.min.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',

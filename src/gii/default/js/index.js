@@ -1,11 +1,9 @@
-Theme.register(["baseinput", "buttongroup", 'grid', 'pager'], Vue);
-const Model = window.ledap.Model;
-const WebDataProvider = window.ledap.WebDataProvider;
+ledap.App.register(["form-item", "group", "tab", 'grid', 'pager'], Vue);
 <?php $urlPrefix = $generator->getControllerID(); ?>
 const app = new Vue({
   el: "#app",
   data : {
-    dp : ledap.getWebDp({
+    dp : ledap.App.getWebDp({
         httpOptions:{
             url: "/<?=$urlPrefix?>/index",
             params: {},
@@ -53,12 +51,14 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         this.dp.refresh("");
     },
     remove(model){
-        ledap.request({
-            url: "/<?=$urlPrefix?>/delete?id=" + model.id,
-            method: 'POST',
-        }, () =>{
-            this.dp.remove(model);
-        })
+        if(confirm("你确定要删除该数据")) {
+            ledap.App.request({
+                url: "/<?=$urlPrefix?>/delete?id=" + model.id,
+                method: 'POST',
+            }, () =>{
+                this.dp.remove(model);
+            })
+        }
     }
   },
 });

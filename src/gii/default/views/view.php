@@ -27,7 +27,7 @@ $this->registerJsVar("data", [
         <div class="panel-body">
             <button class="btn btn-default" @click="changeType()" v-if="type !== 'create'">{{type==="update" ? "查看" : "编辑"}}</button>
             <div v-if="type==='view'">
-                <detail-view class="table table-bordered table-striped table-hover" :data-model="model" :columns="columns">
+                <detail class="table table-bordered table-striped table-hover" :model="model" :columns="columns">
                 </detail>
             </div>
             <div v-else>

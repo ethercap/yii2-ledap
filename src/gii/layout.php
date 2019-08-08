@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-\ethercap\ledap\assets\BootstrapTheme::register($this);
+\ethercap\ledap\assets\AppAsset::register($this);
 \ethercap\ledap\helpers\JsHelper::register($this);
 ?>
 <?php $this->beginPage() ?>

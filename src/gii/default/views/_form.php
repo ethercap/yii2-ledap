@@ -15,15 +15,19 @@ if (empty($safeAttributes)) {
 <?php
 if (($tableSchema = $generator->getTableSchema()) === false) {
     foreach ($generator->getColumnNames() as $name) {
-        echo "    <baseInput class=\"form-group\" :model=\"model\" :attr=\"'" . $name . "'\"></baseInput>\n";
+        echo '    <form-item class="form-group" :model="model" attr="' . $name . "\"></form-item>\n";
     }
 } else {
     foreach ($generator->getTableSchema()->columns as $column) {
         $format = $generator->generateColumnFormat($column);
         if ($format === 'boolean') {
-            echo "    <radiogroup class=\"form-group\" :model=\"model\" :attr=\"'".$column->name ."'\'></radiogroup>\n";
+            echo '    <form-item class="form-group" :model="model" attr="'.$column->name ."\'>\n";
+            echo "        <template v-slot=\"p\">\n";
+            echo "            <groupinput v-bind=\"p\"></groupinput>\n";
+            echo "        </template>\n";
+            echo "    </form-item>\n";
         } else {
-            echo "    <baseInput class=\"form-group\" :model=\"model\" :attr=\"'" . $column->name . "'\"></baseInput>\n";
+            echo '    <form-item class="form-group" :model="model" attr="' . $column->name . "\"></form-item>\n";
         }
     }
 }

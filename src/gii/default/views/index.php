@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if (!empty($generator->searchModelClass)): ?>
     <div class="panel panel-default staff-list">
         <div class="panel-body">
-            <form>
+            <form class="form-horizontal">
 <?php
 $count = 0;
 foreach ($generator->getColumnNames() as $name) {
     if (++$count < 6) {
         echo "                <div class=\"col-sm-4\">\n";
-        echo "                    <baseinput class=\"form-group\" :model=\"dp.searchModel\" :attr=\"'" . $name . "'\"></baseinput>\n";
+        echo '                    <form-item class="form-group" :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
         echo "                </div>\n";
     }
 }

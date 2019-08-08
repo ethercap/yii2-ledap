@@ -1,0 +1,21 @@
+<?php
+use ethercap\apiBase\components\ResBuilder;
+use yii\data\ActiveDataProvider;
+use ethercap\apiBase\widgets\ListApi;
+use ethercap\apiBase\widgets\DetailApi;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
+
+$res->field("params")->widget(DetailApi::class, [
+    'useModelResponse' => true,
+    'model' => $searchModel,
+    'columns' => [
+        $searchModel->idName,
+        $searchModel->keyName,
+    ],
+]); 
+$res->data()->widget(ListApi::class, [
+    'dataProvider' => $dataProvider,
+    'columns' => $dataConfig,
+]); 
