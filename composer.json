@@ -19,5 +19,8 @@
         "psr-4": {
             "ethercap\\ledap\\": "src/"
         }
+    },
+    "extra": {
+        "bootstrap": "ethercap\\ledap\\Bootstrap"
     }
 }
