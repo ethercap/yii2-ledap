@@ -5,6 +5,7 @@ namespace ethercap\ledap;
 use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
+use ethercap\ledap\gii\Generator;
 
 /**
  * @author lishipeng <buptlsp@sina.com>
@@ -21,9 +22,9 @@ class Bootstrap implements BootstrapInterface
         if ($app->hasModule('gii')) {
             $config = [
                 'ledapCrud' => [
-                    'class' => 'yii\gii\generators\crud\Generator',
+                    'class' => Generator::class,
                     'templates' => [
-                        'default' => '@ethercap/ledap/templates/crud',
+                        'default' => '@ethercap/ledap/gii/default',
                     ],
                 ],
             ];
