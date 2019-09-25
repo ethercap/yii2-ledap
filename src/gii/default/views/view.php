@@ -35,4 +35,7 @@ $this->registerJsVar("data", [
             </div>
         </div>
     </div>
+    <div class="page-loading-container" v-if="isLoading">
+        <div class="page-loading">加载中…</div>
+    </div>
 </div>

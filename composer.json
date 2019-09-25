@@ -5,7 +5,7 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "require": {
-        "npm-asset/vue": "^2.5",
+        "npm-asset/vue": "^2.6",
         "ethercap/yii2-api-base": "@dev",
         "ethercap/common" : "@dev"
     },

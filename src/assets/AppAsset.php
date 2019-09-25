@@ -10,10 +10,10 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__;
+    public $sourcePath = __DIR__.'/static';
     public $css = [];
     public $js = [
-        './static/ledap-init.js',
+        'ledap-init.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\BootstrapTheme',

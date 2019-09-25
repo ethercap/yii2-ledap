@@ -59,4 +59,7 @@ foreach ($generator->getColumnNames() as $name) {
     </list>
 <?php endif; ?>
     <pager class="pull-right" :data-provider="dp"></pager>
+    <div class="page-loading-container" v-if="dp.isLoading">
+        <div class="page-loading">加载中…</div>
+    </div>
 </div>

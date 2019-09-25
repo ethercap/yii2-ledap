@@ -4,6 +4,7 @@ const app = new Vue({
   data : {
     model: ledap.App.getModel(data.model),
     type : data.type,
+    isLoading : false,
     columns : [
 <?php
 if (($tableSchema = $generator->getTableSchema()) === false) {
@@ -30,20 +31,25 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                     error = errors[key][0];
                 }
             });
-            alert(error);        
+            this.$toasted.error(error);
             return false;
         }
 <?php $urlPrefix = $generator->getControllerID(); ?>
         let url = this.type === "create" ? '/<?=$urlPrefix?>/create' : '/<?=$urlPrefix?>/update?id='+this.model.id;
+        this.isLoading = true;
         ledap.App.request({
             url: url,
             method: 'POST',
             data: this.model
         }, (data) =>{
             this.model.load(data.data);
+            this.isLoading  = false;
             if(!this.model.hasErrors()) {
-                alert("操作成功");
+                this.$toasted.show("操作成功");
             }
+        }, (data)=>{
+            this.isLoading = false;
+            this.$toasted.error(data.message);
         });
     },
     changeType: function() {

@@ -44,6 +44,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     ],
   },
   created: function(){
+    this.dp.isLoading = true;
     this.dp.refresh("");
   },
   methods : {
@@ -60,6 +61,6 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             })
         }
     }
-  },
+  }
 });
 

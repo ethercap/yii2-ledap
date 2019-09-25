@@ -4,3 +4,65 @@
 .content {
     padding: 20px;
 }
+
+.page-loading-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.page-loading {
+    width: 120px;
+    padding: 95px 10px 25px;
+    font-size: 14px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(34, 34, 34, 0.5);
+    height: 24px;
+    line-height: 24px;
+    border-radius: 8px;
+    position: absolute;
+}
+.page-loading::before, .page-loading::after {
+    content: "\200B";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 3px solid;
+    box-sizing: border-box;
+    border-radius: 100%;
+    animation: pageLoadingRotate 1.2s 0s ease-in-out infinite;
+}
+.page-loading::before {
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    border-color: transparent #fff;
+}
+.page-loading::after {
+    width: 28px;
+    height: 28px;
+    top: 36px;
+    animation-duration: 0.6s;
+    border-color: #fff transparent;
+    animation-direction: reverse;
+}
+@keyframes pageLoadingRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(0.6);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
