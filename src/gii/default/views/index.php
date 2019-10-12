@@ -31,14 +31,21 @@ $this->params['breadcrumbs'][] = $this->title;
 $count = 0;
 foreach ($generator->getColumnNames() as $name) {
     if (++$count < 6) {
-        echo "                <div class=\"col-sm-4\">\n";
-        echo '                    <form-item class="form-group" :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
-        echo "                </div>\n";
+        if (($count - 1) % 3 == 0) {
+            if ($count > 1) {
+                echo "                </div>\n";
+            }
+            echo "                <div class=\"row\">\n";
+        }
+        echo "                    <div class=\"col-sm-4\">\n";
+        echo '                        <form-item :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
+        echo "                    </div>\n";
     }
 }
 ?>
-                <div class="form-group col-sm-4">
-                    <a class="btn btn-primary" @click="refresh()">查询</a>
+                    <div class="form-group col-sm-4">
+                        <a class="btn btn-primary" @click="refresh()">查询</a>
+                    </div>
                 </div>
             </form>
         </div>
