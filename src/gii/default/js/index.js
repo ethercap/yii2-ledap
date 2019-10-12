@@ -6,7 +6,7 @@ const app = new Vue({
     dp : ledap.App.getWebDp({
         httpOptions:{
             url: "/<?=$urlPrefix?>/index",
-            params: {},
+            params: GetParams(),
         }
     }),
     columns : [

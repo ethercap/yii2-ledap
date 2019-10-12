@@ -5,6 +5,19 @@
     padding: 20px;
 }
 
+.textarea {
+    display: inline; 
+    min-height: 30px;    
+}
+.textarea-number {
+    position: relative;
+    right: 63px;
+    bottom: 10px;
+    display: inline-block;
+    text-align: right;
+    width: 4em;
+}
+
 .page-loading-container {
     position: fixed;
     top: 0;
