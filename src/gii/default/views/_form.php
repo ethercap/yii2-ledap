@@ -21,13 +21,13 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     foreach ($generator->getTableSchema()->columns as $column) {
         $format = $generator->generateColumnFormat($column);
         if ($format === 'boolean') {
-            echo '    <form-item class="form-group" :model="model" attr="'.$column->name ."\'>\n";
+            echo '    <form-item :model="model" attr="'.$column->name ."\'>\n";
             echo "        <template v-slot=\"p\">\n";
             echo "            <groupinput v-bind=\"p\"></groupinput>\n";
             echo "        </template>\n";
             echo "    </form-item>\n";
         } else {
-            echo '    <form-item class="form-group" :model="model" attr="' . $column->name . "\"></form-item>\n";
+            echo '    <form-item :model="model" attr="' . $column->name . "\"></form-item>\n";
         }
     }
 }
