@@ -2,16 +2,18 @@
 // 主题代表一个工程一整个标准的组件的主题设置，一般由UI与前端进行沟通并固化。通过主题，我们能很好地实现某个工程的组件标准化.
 var themeConfig = {
     "form-item" : {
-        template:`<component :is="tag" class="form-group" :class="{'has-error':showError}">
+        template:`<component :is="tag" class="form-group row">
             <slot name="label" :model="model" :attr="attr">
-                <label class="col-sm-2 control-label"> {{model.getAttributeLabel(attr)}}{{model.isRequired(attr) ? '*' : ''}}</label>
+                <label class="col-sm-3 col-form-label text-right"> {{model.getAttributeLabel(attr)}}{{model.isRequired(attr) ? '*' : ''}}</label>
             </slot>
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <slot :model="model" :attr="attr" :validate="validate" :inputListeners="inputListeners">
                     <input class="form-control" :name="attr" :value="model[attr]" :placeholder="model.getAttributeHint(attr)" v-on="inputListeners" />
                 </slot>
                 <slot name="error" :model="model" :attr="attr" :showError="showError">
-                    <p v-show="showError" class="help-block">{{showError}}</p>
+                    <b-form-invalid-feedback :state="!Boolean(showError)">
+                    {{showError}}
+                    </b-form-invalid-feedback>
                 </slot>
             </div>
         </component>`,
@@ -65,14 +67,14 @@ var themeConfig = {
 </div>`,
     },
     pager:{
-        template: `<div style="display:flex;align-items: center;">
+        template: `<div class="d-flex align-items-center">
         <slot name="total">
-            <span>共{{ dataProvider.pager.totalCount }}条记录</span>
+            <span>共<span class="text-danger">{{ dataProvider.pager.totalCount }}</span>条记录</span>
             <span style="flex:1"></span>
         </slot>
         <slot :changePage="changePage">
-            <a v-show="dataProvider.pager.hasPrev()" @click="toPrev()">上一页</a>
-            <a v-show="dataProvider.pager.hasNext()" @click="toNext()" style="margin-left: 10px">下一页</a>
+            <a v-show="dataProvider.pager.hasPrev()" @click="toPrev()" class="text-primary">上一页</a>
+            <a v-show="dataProvider.pager.hasNext()" @click="toNext()" class="ml-10 text-primary">下一页</a>
             <span style="margin: 0 15px">第 {{ dataProvider.pager.currentPage}}/{{ dataProvider.pager.pageCount }} 页</span>
         </slot>
         <slot name="form" :changePage="changePage">

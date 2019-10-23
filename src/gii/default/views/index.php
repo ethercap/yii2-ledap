@@ -11,61 +11,57 @@ $nameAttribute = $generator->getNameAttribute();
 
 echo "<?php\n";
 ?>
-
-use yii\helpers\Html;
-use <?= $generator->indexWidgetType === 'grid' ? 'yii\\grid\\GridView' : 'yii\\widgets\\ListView' ?>;
-
-/* @var $this yii\web\View */
-<?= !empty($generator->searchModelClass) ? '/* @var $searchModel ' . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>;
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index" id="app">
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
+    <b-breadcrumb :items="[
+        {text:'<?php echo '<?=$this->title?>'; ?>', active:true}
+    ]"></b-breadcrumb>
 <?php if (!empty($generator->searchModelClass)): ?>
-    <div class="panel panel-default staff-list">
-        <div class="panel-body">
-            <form class="form-horizontal">
+    <div class="card mb-5">
+        <form class="card-body form-horizontal" @submit.stop.prevent>
 <?php
 $count = 0;
 foreach ($generator->getColumnNames() as $name) {
     if (++$count < 6) {
         if (($count - 1) % 3 == 0) {
             if ($count > 1) {
-                echo "                </div>\n";
+                echo "            </div>\n";
             }
-            echo "                <div class=\"row\">\n";
+            echo "            <div class=\"row\">\n";
         }
-        echo "                    <div class=\"col-sm-4\">\n";
-        echo '                        <form-item :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
-        echo "                    </div>\n";
+        echo "                <div class=\"col-sm-4\">\n";
+        echo '                    <form-item :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
+        echo "                </div>\n";
     }
 }
 ?>
-                    <div class="form-group col-sm-4">
-                        <a class="btn btn-primary" @click="refresh()">查询</a>
-                    </div>
+                <div class="form-group col-sm-4">
+                    <button class="btn btn-primary" @click="refresh()">查询</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
 <?php endif; ?>
-
-    <p class="text-right">
+    <div class="card mb-5">
+        <div class="card-body">
+            <p class="text-right">
 <?php $urlPrefix = $generator->getControllerID(); ?>
-        <a class="btn btn-success" href="/<?=$urlPrefix?>/view?type=create">创建</a>
-    </p>
-
+                <a class="btn btn-success" href="/<?=$urlPrefix?>/view?type=create">创建</a>
+            </p>
 <?php if ($generator->indexWidgetType === 'grid'): ?>
-    <grid class="table table-bordered table-striped table-hover" :data-provider="dp" :columns="columns">
-    </grid>
+            <div class="table-responsive">
+                <grid class="table table-bordered table-striped table-hover" :data-provider="dp" :columns="columns">
+                </grid>
+            </div>
 <?php else: ?>
-    <list :data-provider="dp" :columns="columns">
-    </list>
+            <list :data-provider="dp" :columns="columns">
+            </list>
 <?php endif; ?>
-    <pager :data-provider="dp"></pager>
+            <pager :data-provider="dp"></pager>
+        </div>
+    </div>
     <div class="page-loading-container" v-if="dp.isLoading">
         <div class="page-loading">加载中…</div>
     </div>

@@ -31,11 +31,15 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                     error = errors[key][0];
                 }
             });
-            this.$toasted.error(error);
+            this.$toast(error, {variant:'warning'});
             return false;
         }
-<?php $urlPrefix = $generator->getControllerID(); ?>
-        let url = this.type === "create" ? '/<?=$urlPrefix?>/create' : '/<?=$urlPrefix?>/update?id='+this.model.id;
+<?php
+$modelClass = $generator->modelClass;
+$pk = $modelClass::primaryKey()[0];
+
+?>
+        let url = this.type === "create" ? '<?=$generator->getUrl("create")?>' : '<?=$generator->getUrl("update")?>?id='+this.model.id;
         this.isLoading = true;
         ledap.App.request({
             url: url,
@@ -45,11 +49,11 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             this.model.load(data.data);
             this.isLoading  = false;
             if(!this.model.hasErrors()) {
-                this.$toasted.show("操作成功");
+                this.$toast("操作成功");
             }
         }, (data)=>{
             this.isLoading = false;
-            this.$toasted.error(data.message);
+            this.$toast(data.message, {variant:'danger'});
         });
     },
     changeType: function() {

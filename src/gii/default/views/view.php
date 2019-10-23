@@ -13,19 +13,21 @@ echo "<?php\n";
 if($type == "create") {
     $this->title = "创建";
 } else{
-    $this->title = $model['<?= $generator->getNameAttribute() ?>']['value'];
+    $this->title = "编辑".$model['<?= $generator->getNameAttribute() ?>']['value'];
 }
-$this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 $this->registerJsVar("data", [
     'model' => $model,
     'type' => $type,
 ]);
 <?php echo "?>\n"; ?>
-<div id="app" class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <button class="btn btn-default" @click="changeType()" v-if="type !== 'create'">{{type==="update" ? "查看" : "编辑"}}</button>
+<b-breadcrumb :items="[
+    {text:<?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass))))?>, href:'<?=$generator->getUrl('index')?>'},
+    {text:'<?php echo '<?=$this->title?>'; ?>', active:true}
+]"></b-breadcrumb>
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
+    <div class="card mb-5">
+        <div class="card-body">
+            <button class="btn btn-outline-primary mb-3" @click="changeType()" v-if="type !== 'create'">{{type==="update" ? "查看" : "编辑"}}</button>
             <div v-if="type==='view'">
                 <detail class="table table-bordered table-striped table-hover" :model="model" :columns="columns">
                 </detail>

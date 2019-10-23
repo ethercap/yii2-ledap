@@ -19,6 +19,6 @@ class BootstrapTheme extends AssetBundle
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',
-        '\yii\bootstrap\BootstrapAsset',
+        '\ethercap\ledap\assets\BootstrapVue',
     ];
 }

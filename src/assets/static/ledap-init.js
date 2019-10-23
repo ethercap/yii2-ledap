@@ -1,4 +1,4 @@
-var request = function(httpOptions, suc, fail = function(data){Vue.alert(data.message);}){
+var request = function(httpOptions, suc, fail = function(data){app.$alert(data.message);}){
     httpOptions = Object.assign({
         headers: {'X-Requested-With': 'XMLHttpRequest'},
     }, httpOptions);
@@ -27,7 +27,7 @@ ledap.App.config({
             ledap.App.request(httpOptions, (res) => {
                 suc(res.data);
             }, (data) => {
-                Vue.alert(data.message);
+                app.$alert(data.message);
                 fail(data);
             })
         }
@@ -35,148 +35,120 @@ ledap.App.config({
 });
 
 ledap.App.getTheme().addComponent({
-    name : 'modal',
+    name : 'editable',
     props: {
-        show:{
-            default: false,
-        },
-        size:{
-            type: String,
-            default : ""
+        isedit : {
+            type: Boolean,
+            default :false,
         }
     },
-    methods:{
-        close: function(){
-            this.$emit("update:show",!this.show);
-        },
-        clickBg: function(event){
-            if(event.target.getAttribute("role") === "modal") {
-                this.close();
+    data:function(){
+        return {
+            edit: this.isedit,
+        };
+    },
+    methods: {
+        toggle: function(type=false){
+            this.edit = type;
+            this.$emit("update:isedit",this.edit);
+            this.$emit('toggle', this.edit);
+            if(this.edit) {
+                this.$nextTick().then(() =>{
+                    let editslot = this.$refs.editslot;
+                    let tagArr = ["input", "select", "textarea"];
+                    for(let i=0; i<tagArr.length; i++) {
+                        let tmp = editslot.getElementsByTagName(tagArr[i]);
+                        if(tmp.length > 0) {
+                            tmp[0].focus();
+                            break;
+                        }
+                    }
+                });
             }
         }
     },
-    computed: {
-        modalSize: function(){
-            return this.size === "" ? "" : "modal-"+this.size;
-        }
+    watch:{
+        isedit:function(val){
+            this.edit = val;
+        },
     },
-    template: `<div>
-        <div class="fade modal" @click="clickBg" :class="{in:show}" role="modal" tabindex="-1" :style="{display:show? 'block' : 'none'}">
-            <div class="modal-dialog" :class="[modalSize]">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" @click="close">×</button>
-                        <slot name="header"></slot>
-                    </div>
-                    <div class="modal-body">
-                        <slot></slot>
-                    </div>
-                    <slot name="footer">
-                        <div class="modal-footer">
-                        </div>
-                    </slot>
-                </div>
-            </div>
+    template: `<div >
+        <div v-if="edit" ref="editslot">
+            <slot name="editing" :toggle="toggle" :edit="edit"></slot>
         </div>
-        <div class="modal-backdrop fade in" v-if="show" @click="close"></div>
+        <span v-else @click="toggle(true)"> 
+            <slot :toggle="toggle" :edit="edit"></slot>
+        </span>
     </div>`,
-});
+});    
 
-Vue.use(Toasted, {
-    duration: 5000,
-    keepOnHover: true,
-    iconPack : 'fontawesome',
-    position: 'top-center',
-});
-
-
-ledap.App.getTheme().register(["modal"], Vue);
-var Notify  = Vue.extend({
-    template: `
-<modal :show="show" :size="options.size" @update:show="val => show = val" >
-    <template v-slot:header>
-        <h4>{{options.title}}</h4>
-    </template>
-    <template v-slot:default>
-        <div v-html="options.message"></div>
-    </template>
-    <template v-slot:footer>
-        <div class="modal-footer">
-            <a class="btn btn-default pull-left" v-if="options.type !== 'alert'" @click="cancelClicked">{{options.cancelBtnText}}</a>
-            <span v-html="options.footer"></span>
-            <a class="btn btn-primary pull-right"  @click="okClicked">{{options.okBtnText}}</a>
-        </div>
-    </template>
-</modal>`,
-    data : function(){
-        return {
-            show : false,
-            options : {
-                type : "modal",
-                title : "温馨提示",
-                size : 'sm',
-                message : "",
-                okBtnText : "确定",
-                cancelBtnText : "取消",
-                footer : "",
-            },
-        };
-    },
-    methods : {
-        okClicked: function(event){
-            this.$emit("okBtnClicked", {event: event});
-            this.show = false;
-        },
-        cancelClicked: function(event){
-            this.$emit("cancelBtnClicked", {event: event});
-            this.show = false;
-        },
-    
-    },
-});
 
 //添加全局的$alert和$confirm 
-const NotifyPlugin = {
-    install(Vue, options) {
-        if (!options) {
-            options = {};
-        }
-        let notifyComp = new Notify().$mount();
-        document.getElementsByTagName("body")[0].appendChild(notifyComp.$el)
-
-        var func = function(opts) {
-            if(typeof opts === "string") {
-                opts = {message : opts};
+const MyMixin = {
+    methods: {
+        '$alert' : function(msg, opts){
+            let options = Object.assign({
+                title: '温馨提示',
+                okVariant: 'success',
+                okTitle : '确定',
+                centered: true
+            }, opts);
+            if(typeof msg === 'string') {
+                let _this = this;
+                msg = this.$createElement({
+                    data : function() {
+                        return {
+                            vm : _this,
+                        };
+                    },
+                    template: '<span>'+msg+'</span>',
+                });
             }
-            notifyComp.show = true;
-            notifyComp.options = Object.assign(notifyComp.options, opts);
+            return this.$bvModal.msgBoxOk(msg, options);
+        },
+        '$confirm' : function(msg, opts) {
+            let options = Object.assign({
+                title: '温馨提示',
+                okVariant: 'success',
+                okTitle : '确定',
+                cancelTitle : '取消',
+                centered: true
+            }, opts);
+            if(typeof msg === 'string') {
+                let _this = this;
+                msg = this.$createElement({
+                    data : function() {
+                        return {
+                            vm : _this,
+                        };
+                    },
+                    template: '<span>'+msg+'</span>',
+                });
+            }
+            return this.$bvModal.msgBoxConfirm(msg, options);
+        },
+        '$toast' : function(msg, opts) {
+            let options = Object.assign({
+                title: '温馨提示',
+                variant : 'success',
+                solid: true
+            }, opts);
+            if(typeof msg === 'string') {
+                let _this = this;
+                msg = this.$createElement({
+                    data : function() {
+                        return {
+                            vm : _this,
+                        };
+                    },
+                    template: '<span>'+msg+'</span>',
+                });
+            }
+            return this.$bvToast.toast(msg, options);
         }
-    
-        Vue.modal = Vue.prototype.$modal = func;
-
-        Vue.alert = Vue.prototype.$alert = function(opts = {}, suc=function(){}){
-            notifyComp.$once("okBtnClicked", suc);
-            func(opts);
-            notifyComp.options.type = 'alert';
-        };
-        Vue.confirm = Vue.prototype.$confirm = function(opts = {}, suc=function(){}, fail=function(){}){
-            notifyComp.$on("okBtnClicked", function(){
-                suc();
-                notifyComp.$off("okBtnClicked");
-                notifyComp.$off("cancelBtnClicked");
-            });
-            notifyComp.$on("cancelBtnClicked", function(){
-                fail();
-                notifyComp.$off("okBtnClicked");
-                notifyComp.$off("cancelBtnClicked");
-            });
-            func(opts);
-            notifyComp.options.type = 'confirm';
-        };
-    }
+    },
 };
-Vue.use(NotifyPlugin);
-
+Vue.mixin(MyMixin);
 
 //一些全局有用的函数
 window.GetParams = function() {

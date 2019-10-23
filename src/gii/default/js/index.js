@@ -1,11 +1,14 @@
 ledap.App.register(["form-item", "group", "tab", 'grid', 'pager'], Vue);
-<?php $urlPrefix = $generator->getControllerID(); ?>
+<?php 
+$modelClass = $generator->modelClass;
+$pk = $modelClass::primaryKey()[0];
+?>
 const app = new Vue({
   el: "#app",
   data : {
     dp : ledap.App.getWebDp({
         httpOptions:{
-            url: "/<?=$urlPrefix?>/index",
+            url: "<?=$generator->getUrl('index')?>",
             params: GetParams(),
         }
     }),
@@ -35,9 +38,9 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'label' : '操作',
             'value' : function(model) {
                 return `<div class="btn-group">
-                    <a class="btn btn-primary" href="/<?=$urlPrefix?>/view?id=`+ model.id +`">查看</a>
-                    <a class="btn btn-warning" href="/<?=$urlPrefix?>/view?id=`+ model.id +`&type=update">编辑</a>
-                    <a class="btn btn-danger" @click="vm.remove(model)">删除</a></div>`; 
+                    <a class="btn btn-primary text-white" href="<?=$generator->getUrl('view')?>?id=`+ model.<?=$pk?> +`">查看</a>
+                    <a class="btn btn-warning text-white" href="<?=$generator->getUrl('view')?>?id=`+ model.<?=$pk?> +`&type=update">编辑</a>
+                    <a class="btn btn-danger text-white" @click="vm.remove(model)">删除</a></div>`; 
             },
             'format' : 'html',
         }
@@ -54,7 +57,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     remove(model){
         if(confirm("你确定要删除该数据")) {
             ledap.App.request({
-                url: "/<?=$urlPrefix?>/delete?id=" + model.id,
+                url: "<?=$generator->getUrl('delete')?>?id=" + model.<?=$pk?>,
                 method: 'POST',
             }, () =>{
                 this.dp.remove(model);

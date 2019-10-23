@@ -11,11 +11,11 @@ if (empty($safeAttributes)) {
     $safeAttributes = $model->attributes();
 }
 ?>
-<form class="form-horizontal col-sm-6 col-sm-offset-3">
+<form class="form-horizontal col-sm-6 offset-sm-3" @submit.stop.prevent>
 <?php
 if (($tableSchema = $generator->getTableSchema()) === false) {
     foreach ($generator->getColumnNames() as $name) {
-        echo '    <form-item class="form-group" :model="model" attr="' . $name . "\"></form-item>\n";
+        echo '    <form-item :model="model" attr="' . $name . "\"></form-item>\n";
     }
 } else {
     foreach ($generator->getTableSchema()->columns as $column) {
@@ -32,7 +32,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     }
 }
 ?>
-    <div class="form-group col-sm-6 col-sm-offset-3">
-        <button class="btn btn-default" @click="submit">提交</button>
+    <div class="form-group col-sm-6 offset-sm-3">
+        <button class="btn btn-success" @click="submit">提交</button>
     </div>
 </form>

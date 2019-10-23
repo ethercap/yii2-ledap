@@ -13,6 +13,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     public $jsPath;
     public $baseControllerClass = '\ethercap\apiBase\Controller';
     public $searchModelClass = '';
+    public $moduleId;
 
     public function getName()
     {
@@ -23,6 +24,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     {
         return array_merge(parent::rules(), [
             ['viewPath', 'safe'],
+            ['moduleId', 'safe'],
         ]);
     }
 
@@ -37,6 +39,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     {
         return array_merge(parent::hints(), [
             'jsPath' => 'Specify the directory for storing the  javascripts for the view. You may use path alias here, e.g., <code>/var/www/basic/controllers/views/post</code>, <code>@app/views/post</code>. If not set, it will default to <code>/web/js/ControllerID</code>',
+            'moduleId' => 'Specify the module ID',
         ]);
     }
 
@@ -90,5 +93,11 @@ class Generator extends \yii\gii\generators\crud\Generator
             }
         }
         return '@app';
+    }
+
+    public function getUrl($index)
+    {
+        $moduleId = $this->moduleId ? '/'.$this->moduleId : '';
+        return $moduleId.'/'.$this->getControllerID().'/'.$index;
     }
 }
