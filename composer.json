@@ -7,6 +7,7 @@
     "require": {
         "npm-asset/vue": "^2.6",
         "ethercap/yii2-api-base": "@dev",
+        "rmrevin/yii2-fontawesome": "~2.17",
         "ethercap/common" : "@dev"
     },
     "authors": [

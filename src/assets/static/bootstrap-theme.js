@@ -29,7 +29,7 @@ var themeConfig = {
     "groupinput" : {
         template: `<group class="btn-group" :max="dictOption.max" :excludes="dictOption.excludes" :init-value="model[attr]" :multiple="dictOption.multiple" @change="groupChange">
             <slot name="default" v-for="(val,key) in dictOption.list" :data-key="key" :value="val" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false">
-                <tab class="btn btn-default" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false" :data-key="key" :key="key"> {{val}}</tab>
+                <tab class="btn btn-outline-primary" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false" :data-key="key" :key="key"> {{val}}</tab>
             </slot>
         </group>`,
     },
@@ -48,7 +48,7 @@ var themeConfig = {
        template: `<div style="position: relative;">
     <div class="form-control" style="display: flex;height:auto">
         <span v-if="multiple" v-for="model,key in selected" :key="key">
-            <a class="btn btn-xs btn-default" @click="choose(model, key, $event)">{{model[itemName]}}{{'  x'}}</a>&nbsp;
+            <button class="btn btn-sm btn-light" @click="choose(model, key, $event)">{{model[itemName]}}{{'  x'}}</button>&nbsp;
         </span>
         <input :name="attr" ref="input" :value="value" :placeholder="model.getAttributeHint(attr)" v-on="listeners" autocomplete="off" style="border-width: 0px;outline-color:white;flex:1;max-width：100%;min-width:0;">
         <span v-if="!multiple && value" @click="clear" style="cursor: pointer;padding-top:3px;" class="glyphicon glyphicon-remove"></span>

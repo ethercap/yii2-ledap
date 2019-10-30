@@ -17,5 +17,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         '\ethercap\ledap\assets\BootstrapTheme',
+        'rmrevin\yii\fontawesome\AssetBundle',
     ];
 }

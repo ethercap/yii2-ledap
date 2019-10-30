@@ -154,57 +154,53 @@ ledap.App.getTheme().addComponent({
     },
 
     template: `
-<div class="example-full">
+<div>
     <div class="upload">
-        <div class="panel" :class="[($refs.upload && $refs.upload.dropActive) ? 'panel-primary' : 'panel-default']">
-            <div class="panel-body">
-                <div class="text-center p-5">
+        <div class="card" :class="[($refs.upload && $refs.upload.dropActive) ? 'border-primary' : '']">
+            <div class="card-body" style="min-height:100px;">
+                <div class="text-center">
                     <div class="row">
-                        <div class="col-sm-4 col-md-4" v-for="item, index in initialValue" :key="index">
-                            <div class="thumbnail" style="height:200px;overflow-y:auto">
-                                <div style="height: 50px;display:flex;align-items: center;justify-content: center;">
-                                    <img v-if="item.thumb" :src="item.thumb" :alt="item.name" style="height: 100%">
-                                    <span v-else >No Image</span>
-                                </div>
-                                <div style="overflow-x: auto;height: 88px;margin-top:52px;white-space:nowrap">
+                        <div class="col-sm-4 col-md-4 pl-1 pr-1" v-for="item, index in initialValue" :key="index">
+                            <div class="card shadow" style="height:210px;overflow-y:auto">
+                                <img v-if="item.thumb" :src="item.thumb" :alt="item.name" style="height: 5em">
+                                <div v-else class="bg-secondary pt-4 text-white" style="height:5rem;" >No Image</div>
+                                <div class="card-body p-1 mt-1">
                                     <p>{{item.name}}</p>
                                     <div class="actions">
-                                        <span class="glyphicon glyphicon-trash" @click="deleteInitialValue(index)"></span>
+                                        <i class="fa fa-trash-o" @click="deleteInitialValue(index)"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-md-4" v-for="file, index in files" :key="file.id">
-                            <div class="thumbnail" style="height:200px;overflow-y:auto">
-                                <div style="height: 50px;display:flex;align-items: center;justify-content: center;">
-                                    <img v-if="file.thumb" :src="file.thumb" :alt="file.name" style="height: 100%;">
-                                    <span v-else>No Image</span>
-                                </div>
-                                <div class="caption">
-                                    <div class="progress" style="margin-bottom:5px;">
+                        <div class="col-sm-4 col-md-4 pl-1 pr-1" v-for="file, index in files" :key="file.id">
+                            <div class="card shadow" style="height:210px;overflow-y:auto">
+                                <img v-if="file.thumb" :src="file.thumb" :alt="file.name" style="height: 5em">
+                                <div v-else class="bg-secondary pt-4 text-white" style="height:5rem;" >No Image</div>
+                                <div class="card-body p-1 mt-1">
+                                    <div class="progress mb-1">
                                         <div class="progress-bar progress-bar-success" :class="{'progress-bar-animated': file.active}" role="progressbar" :style="{width: file.progress + '%'}" style="min-width:1.5em">{{parseInt(file.progress)}}%</div>
                                     </div>
                                     <div style="overflow-x: auto;height: 95px;white-space:nowrap">
-                                        <div style="margin-top:3px">{{file.name}}</div>
-                                        <div style="margin-top:3px">{{formatSize(file.progress*file.size/100)}}
-                                        b/{{formatSize(file.size)}}b</div>
-                                        <div class="actions" style="margin-top: 3px">
-                                            <span class="glyphicon glyphicon-off" v-if="file.active" @click.prevent="$refs.upload.update(file, {active: false, error:'cancel'})"></span>
-                                            <span class="glyphicon glyphicon-refresh" v-if="file.error && file.error !== 'compressing' && $refs.upload.features.html5" @click.prevent="$refs.upload.update(file, {active: true, error: '', progress: '0.00'})"></span>
-                                            <span class="glyphicon glyphicon-trash"  @click.prevent="$refs.upload.remove(file)"></span>
+                                        <div class="">{{file.name}}</div>
+                                        <small>{{formatSize(file.progress*file.size/100)}}
+                                        b/{{formatSize(file.size)}}b</small>
+                                        <div class="actions">
+                                            <i class="fa fa-remove" v-if="file.active" @click.prevent="$refs.upload.update(file, {active: false, error:'cancel'})"></i>
+                                            <i class="fa fa-refresh" v-if="file.error && file.error !== 'compressing' && $refs.upload.features.html5" @click.prevent="$refs.upload.update(file, {active: true, error: '', progress: '0.00'})"></i>
+                                            <i class="fa fa-trash-o" @click.prevent="$refs.upload.remove(file)"></i>
                                         </div>
-                                        <div v-if="file.error" class="text-danger" style="margin-top:3px">Error: {{file.error}}</div>
+                                        <div v-if="file.error" class="text-danger">Error: {{file.error}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h4>拖动文件到此处上传</h4>
+                    <h4 class="text-muted pt-1">拖动文件到此处上传</h4>
                 </div>
             </div>
         </div>
     </div>
-    <div class="example-foorer">
+    <div class="footer pt-3">
         <file-upload
           class="btn btn-primary dropdown-toggle"
           v-model="files"
