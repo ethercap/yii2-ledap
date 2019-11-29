@@ -47,6 +47,9 @@ class Generator extends \yii\gii\generators\crud\Generator
     {
         if (empty($this->jsPath)) {
             $alias = $this->getBaseAlias();
+            if (!empty($this->moduleId)) {
+                return Yii::getAlias($alias.'/web/js/'.$this->moduleId.'/'.$this->getControllerID());
+            }
             return Yii::getAlias($alias.'/web/js/'. $this->getControllerID());
         }
 
@@ -78,6 +81,9 @@ class Generator extends \yii\gii\generators\crud\Generator
     {
         if (empty($this->viewPath)) {
             $alias = $this->getBaseAlias();
+            if (!empty($this->moduleId)) {
+                return Yii::getAlias($alias.'/modules/'.$this->moduleId.'/views/'.$this->getControllerID());
+            }
             return Yii::getAlias($alias.'/views/'. $this->getControllerID());
         }
         return parent::getViewPath();
