@@ -2,7 +2,6 @@
 
 namespace ethercap\ledap;
 
-use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 use ethercap\ledap\gii\Generator;
@@ -25,6 +24,12 @@ class Bootstrap implements BootstrapInterface
                     'class' => Generator::class,
                     'templates' => [
                         'default' => '@ethercap/ledap/gii/default',
+                    ],
+                ],
+                'ledapAjaxCrud' => [
+                    'class' => Generator::class,
+                    'templates' => [
+                        'default' => '@ethercap/ledap/gii/ajaxCrud',
                     ],
                 ],
             ];
