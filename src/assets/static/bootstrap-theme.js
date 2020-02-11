@@ -23,13 +23,13 @@ var themeConfig = {
     },
     "dropdown" : {
         template: `<select class="form-control" v-on="inputListeners">
-            <option v-for="(val,key) in model.getValidatorData(attr, 'dict', 'list', {})" :value="key" :selected="key === model[attr]">{{val}}</option>
+            <option v-for="key in dictOption.order" :value="key" :selected="key === model[attr]">{{dictOption.list[key]}}</option>
         </select>`,
     },
     "groupinput" : {
         template: `<group class="btn-group" :max="dictOption.max" :excludes="dictOption.excludes" :init-value="model[attr]" :multiple="dictOption.multiple" @change="groupChange">
-            <slot name="default" v-for="(val,key) in dictOption.list" :data-key="key" :value="val" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false">
-                <tab class="btn btn-outline-primary" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false" :data-key="key" :key="key"> {{val}}</tab>
+            <slot name="default" v-for="key in dictOption.order" :data-key="key" :value="val" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false">
+                <tab class="btn btn-outline-primary" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false" :data-key="key" :key="key"> {{dictOption.list[key]}}</tab>
             </slot>
         </group>`,
     },
