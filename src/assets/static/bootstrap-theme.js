@@ -28,7 +28,7 @@ var themeConfig = {
     },
     "groupinput" : {
         template: `<group class="btn-group" :max="dictOption.max" :excludes="dictOption.excludes" :init-value="model[attr]" :multiple="dictOption.multiple" @change="groupChange">
-            <slot name="default" v-for="key in dictOption.order" :data-key="key" :value="val" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false">
+            <slot name="default" v-for="key in dictOption.order" :data-key="key" :value="dictOption.list[key]" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false">
                 <tab class="btn btn-outline-primary" :disabled="dictOption.excludes.indexOf(key) > -1 ? true : false" :data-key="key" :key="key"> {{dictOption.list[key]}}</tab>
             </slot>
         </group>`,
