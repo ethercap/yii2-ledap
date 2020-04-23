@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class LedapAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__.'/static/lib';
+    public $sourcePath = "@npm/ledap/dist";
     public $js = [
         YII_DEBUG ? 'ledap.js' : 'ledap.min.js',
     ];
