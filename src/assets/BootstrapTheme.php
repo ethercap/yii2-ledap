@@ -10,12 +10,12 @@ use yii\web\AssetBundle;
  */
 class BootstrapTheme extends AssetBundle
 {
-    public $sourcePath = __DIR__.'/static';
+    public $sourcePath = "@npm/ledap-vue-bootstrap/lib";
     public $css = [
-        'bootstrap-theme.css',
+        'ledap-vue-bootstrap.css',
     ];
     public $js = [
-        'bootstrap-theme.js',
+        'ledap-vue-bootstrap.umd.min.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',
