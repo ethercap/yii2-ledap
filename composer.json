@@ -6,7 +6,6 @@
     "license": "BSD-3-Clause",
     "require": {
         "ethercap/yii2-api-base": "@dev",
-        "rmrevin/yii2-fontawesome": "~3.0",
         "npm-asset/vue": "^2.6",
         "npm-asset/ledap" : "0.1.7",
         "npm-asset/bootstrap" : "4.4.1",
