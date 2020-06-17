@@ -6,8 +6,8 @@ use yii\web\AssetBundle;
 
 class BootstrapVue extends AssetBundle
 {
-    public $sourcePath = "@npm/bootstrap-vue/dist";
-    
+    public $sourcePath = '@npm/bootstrap-vue/dist';
+
     public $js = [
         YII_DEBUG ? 'bootstrap-vue.js' : 'bootstrap-vue.min.js',
     ];
@@ -15,7 +15,7 @@ class BootstrapVue extends AssetBundle
         YII_DEBUG ? 'bootstrap-vue.css' : 'bootstrap-vue.min.css',
     ];
     public $depends = [
-        'ethercap\ledap\assets\VueAsset',
-        'ethercap\ledap\assets\BootstrapAsset'
+        '\ethercap\ledap\assets\VueAsset',
+        '\ethercap\ledap\assets\BootstrapAsset',
     ];
 }
