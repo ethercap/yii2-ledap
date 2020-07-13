@@ -10,7 +10,7 @@
         "npm-asset/ledap" : "0.1.8",
         "npm-asset/bootstrap" : "4.4.1",
         "npm-asset/bootstrap-vue" : "2.11.0",
-        "npm-asset/ledap-vue-bootstrap" : "0.0.3",
+        "npm-asset/ledap-vue-bootstrap" : "0.0.4",
         "ethercap/common" : "@dev"
     },
     "authors": [
