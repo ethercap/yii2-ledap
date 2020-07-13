@@ -51,15 +51,15 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     this.dp.refresh("");
   },
   methods : {
-    refresh(){
+    refresh: function(){
         this.dp.refresh("");
     },
-    remove(model){
+    remove: function(model){
         if(confirm("你确定要删除该数据")) {
             ledap.App.request({
                 url: "<?=$generator->getUrl('delete')?>?id=" + model.<?=$pk?>,
                 method: 'POST',
-            }, () =>{
+            }, function() {
                 this.dp.remove(model);
             })
         }

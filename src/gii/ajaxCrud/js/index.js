@@ -81,34 +81,34 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     this.dp.refresh("");
   },
   methods : {
-    refresh(){
+    refresh: function(){
         this.dp.refresh("");
     },
-    remove(model){
+    remove: function(model){
         if(confirm("你确定要删除该数据")) {
             ledap.App.request({
                 url: "<?=$generator->getUrl('delete')?>?id=" + model.<?=$pk?>,
                 method: 'POST',
-            }, () =>{
+            }, function() {
                 this.dp.remove(model);
             })
         }
     },
-    create() {
+    create: function() {
         this.model = ledap.App.getModel(data.model);
         this.modalConfig = {
             show: true,
             type: "create",
         };
     },
-    update(model){
+    update: function(model){
         this.getRemoteModel(model);
         this.modalConfig = {
             show: true,
             type: "update",
         };
     },
-    view(model) {
+    view: function(model) {
         this.getRemoteModel(model);
         this.modalConfig = {
             show:true,
@@ -116,26 +116,26 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         };
     },
     //如果与table字段一致，可以直接this.model = model;
-    getRemoteModel(model){
+    getRemoteModel: function(model){
         this.isLoading = true;
         let url = '<?=$generator->getUrl("view")?>?id='+model.id;
         ledap.App.request({
             url: url,
             method: 'GET',
-        }, (data) =>{
+        }, function(res) {
             this.isLoading = false;
-            this.model = ledap.App.getModel(data.model).load(data.data);
-        }, (data) => {
+            this.model = ledap.App.getModel(data.model).load(res.data);
+        }, function(res) {
             this.isLoading = false;
-            this.$toast(data.message, {variant:'danger'});
+            this.$toast(res.message, {variant:'danger'});
         });
     },
-    submit() {
+    submit: function() {
         event.preventDefault();
         if(!this.model.validate()) {
             errors = this.model.getErrors();
             let error = "";
-            Object.keys(errors).forEach(key => {
+            Object.keys(errors).forEach(function(key) {
                 if(errors[key].length > 0) {
                     error = errors[key][0];
                 }
@@ -148,23 +148,23 @@ $modelClass = $generator->modelClass;
 $pk = $modelClass::primaryKey()[0];
 
 ?>
-        let url = this.type === "create" ? '<?=$generator->getUrl("create")?>' : '<?=$generator->getUrl("update")?>?id='+this.model.id;
+        let url = this.modalConfig.type === "create" ? '<?=$generator->getUrl("create")?>' : '<?=$generator->getUrl("update")?>?id='+this.model.id;
         this.isLoading = true;
         ledap.App.request({
             url: url,
             method: 'POST',
             data: this.model
-        }, (data) =>{
-            this.model.load(data.data);
+        }, function(res) {
+            this.model.load(res.data);
             this.isLoading  = false;
             if(!this.model.hasErrors()) {
                 this.$toast("操作成功");
                 this.modalConfig.show = false;
                 this.refresh();
             }
-        }, (data)=>{
+        }, function(res) {
             this.isLoading = false;
-            this.$toast(data.message, {variant:'danger'});
+            this.$toast(res.message, {variant:'danger'});
         });
     }
   }

@@ -16,6 +16,7 @@ class BootstrapVue extends AssetBundle
     ];
     public $depends = [
         '\ethercap\ledap\assets\VueAsset',
+        '\ethercap\ledap\assets\PolyfillAsset',
         '\ethercap\ledap\assets\BootstrapAsset',
     ];
 }

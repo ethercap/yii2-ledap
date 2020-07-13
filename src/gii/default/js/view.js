@@ -26,7 +26,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         if(!this.model.validate()) {
             errors = this.model.getErrors();
             let error = "";
-            Object.keys(errors).forEach(key => {
+            Object.keys(errors).forEach(function(key) {
                 if(errors[key].length > 0) {
                     error = errors[key][0];
                 }
@@ -45,13 +45,13 @@ $pk = $modelClass::primaryKey()[0];
             url: url,
             method: 'POST',
             data: this.model
-        }, (data) =>{
+        }, function(data){
             this.model.load(data.data);
             this.isLoading  = false;
             if(!this.model.hasErrors()) {
                 this.$toast("操作成功");
             }
-        }, (data)=>{
+        }, function(data){
             this.isLoading = false;
             this.$toast(data.message, {variant:'danger'});
         });

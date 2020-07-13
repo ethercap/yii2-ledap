@@ -24,9 +24,9 @@ ledap.App.config({
     webDpConfig : {
         primaryKey: "",
         httpRequest : function(httpOptions, suc, fail) {
-            ledap.App.request(httpOptions, (res) => {
+            ledap.App.request(httpOptions, function(res)  {
                 suc(res.data);
-            }, (data) => {
+            }, function(data) {
                 app.$alert(data.message);
                 fail(data);
             })
@@ -53,7 +53,7 @@ ledap.App.getTheme().addComponent({
             this.$emit("update:isedit",this.edit);
             this.$emit('toggle', this.edit);
             if(this.edit) {
-                this.$nextTick().then(() =>{
+                this.$nextTick().then(function() {
                     let editslot = this.$refs.editslot;
                     let tagArr = ["input", "select", "textarea"];
                     for(let i=0; i<tagArr.length; i++) {
