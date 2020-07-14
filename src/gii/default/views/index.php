@@ -18,50 +18,48 @@ $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::ca
         {text:'<?php echo '<?=$this->title?>'; ?>', active:true}
     ]"></b-breadcrumb>
 <?php if (!empty($generator->searchModelClass)): ?>
-    <div class="card mb-5">
-        <form class="card-body form-horizontal" @submit.stop.prevent>
+    <b-card class="mb-5">
+        <form class="form-horizontal" @submit.stop.prevent>
 <?php
 $count = 0;
 foreach ($generator->getColumnNames() as $name) {
     if (++$count < 6) {
         if (($count - 1) % 3 == 0) {
             if ($count > 1) {
-                echo "            </div>\n";
+                echo "            </b-row>\n";
             }
-            echo "            <div class=\"row\">\n";
+            echo "            <b-row>\n";
         }
-        echo "                <div class=\"col-sm-4\">\n";
+        echo "                <b-col sm=\"4\">\n";
         echo '                    <form-item :model="dp.searchModel" attr="' . $name . "\"></form-item>\n";
-        echo "                </div>\n";
+        echo "                </b-col>\n";
     }
 }
 ?>
-                <div class="form-group col-sm-4">
+                <b-col cols="4" class="form-group">
                     <button class="btn btn-primary" @click="refresh()">查询</button>
-                </div>
-            </div>
+                </b-col>
+            </b-row>
         </form>
-    </div>
+    </b-card>
 
 <?php endif; ?>
-    <div class="card mb-5">
-        <div class="card-body">
-            <p class="text-right">
+    <b-card class="mb-5">
+        <p class="text-right">
 <?php $urlPrefix = $generator->getControllerID(); ?>
-                <a class="btn btn-success" href="/<?=$urlPrefix?>/view?type=create">创建</a>
-            </p>
+            <a class="btn btn-success" href="/<?=$urlPrefix?>/view?type=create">创建</a>
+        </p>
 <?php if ($generator->indexWidgetType === 'grid'): ?>
-            <div class="table-responsive">
-                <grid class="table table-bordered table-striped table-hover" :data-provider="dp" :columns="columns">
-                </grid>
-            </div>
-<?php else: ?>
-            <list :data-provider="dp" :columns="columns">
-            </list>
-<?php endif; ?>
-            <pager :data-provider="dp"></pager>
+        <div class="table-responsive">
+            <grid class="table table-bordered table-striped table-hover" :data-provider="dp" :columns="columns">
+            </grid>
         </div>
-    </div>
+<?php else: ?>
+        <list :data-provider="dp" :columns="columns">
+        </list>
+<?php endif; ?>
+        <pager :data-provider="dp"></pager>
+    </b-card>
     <div class="page-loading-container" v-if="dp.isLoading">
         <div class="page-loading">加载中…</div>
     </div>

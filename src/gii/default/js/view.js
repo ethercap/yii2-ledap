@@ -24,14 +24,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     submit : function(){
         event.preventDefault();
         if(!this.model.validate()) {
-            errors = this.model.getErrors();
-            let error = "";
-            Object.keys(errors).forEach(function(key) {
-                if(errors[key].length > 0) {
-                    error = errors[key][0];
-                }
-            });
-            this.$toast(error, {variant:'warning'});
+            this.$toast(this.model.getFirstError(), {variant:'warning'});
             return false;
         }
 <?php
@@ -45,16 +38,18 @@ $pk = $modelClass::primaryKey()[0];
             url: url,
             method: 'POST',
             data: this.model
-        }, function(data){
-            this.model.load(data.data);
+        }, function(res){
+            this.model.load(res.data);
             this.isLoading  = false;
             if(!this.model.hasErrors()) {
                 this.$toast("操作成功");
+            }else {
+                this.$toast(this.model.getFirstError(), {variant:'warning'});
             }
-        }, function(data){
+        }.bind(this), function(res){
             this.isLoading = false;
-            this.$toast(data.message, {variant:'danger'});
-        });
+            this.$toast(res.message, {variant:'danger'});
+        }.bind(this));
     },
     changeType: function() {
         if(this.type === 'create') {

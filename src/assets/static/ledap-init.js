@@ -1,4 +1,7 @@
-var request = function(httpOptions, suc, fail = function(data){app.$alert(data.message);}){
+var request = function(httpOptions, suc, fail){
+    if(!fail) {
+        fail = function(data){app.$alert(data.message);}
+    }
     httpOptions = Object.assign({
         headers: {'X-Requested-With': 'XMLHttpRequest'},
     }, httpOptions);
@@ -72,14 +75,14 @@ ledap.App.getTheme().addComponent({
             this.edit = val;
         },
     },
-    template: `<div >
-        <div v-if="edit" ref="editslot">
-            <slot name="editing" :toggle="toggle" :edit="edit"></slot>
-        </div>
-        <span v-else @click="toggle(true)"> 
-            <slot :toggle="toggle" :edit="edit"></slot>
-        </span>
-    </div>`,
+    template: '<div >' + 
+        '<div v-if="edit" ref="editslot">' + 
+            '<slot name="editing" :toggle="toggle" :edit="edit"></slot>' + 
+        '</div>' +
+        '<span v-else @click="toggle(true)">' +
+            '<slot :toggle="toggle" :edit="edit"></slot>' +
+        '</span>' + 
+    '</div>',
 });    
 
 

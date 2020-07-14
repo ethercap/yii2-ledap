@@ -91,7 +91,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 method: 'POST',
             }, function() {
                 this.dp.remove(model);
-            })
+            }.bind(this));
         }
     },
     create: function() {
@@ -125,22 +125,15 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         }, function(res) {
             this.isLoading = false;
             this.model = ledap.App.getModel(data.model).load(res.data);
-        }, function(res) {
+        }.bind(this), function(res) {
             this.isLoading = false;
             this.$toast(res.message, {variant:'danger'});
-        });
+        }.bind(this));
     },
     submit: function() {
         event.preventDefault();
         if(!this.model.validate()) {
-            errors = this.model.getErrors();
-            let error = "";
-            Object.keys(errors).forEach(function(key) {
-                if(errors[key].length > 0) {
-                    error = errors[key][0];
-                }
-            });
-            this.$toast(error, {variant:'warning'});
+            this.$toast(this.model.getFirstError(), {variant:'warning'});
             return false;
         }
 <?php
@@ -161,11 +154,13 @@ $pk = $modelClass::primaryKey()[0];
                 this.$toast("操作成功");
                 this.modalConfig.show = false;
                 this.refresh();
+            } else {
+                this.$toast(this.model.getFirstError(), {variant:'warning'});
             }
-        }, function(res) {
+        }.bind(this), function(res) {
             this.isLoading = false;
             this.$toast(res.message, {variant:'danger'});
-        });
+        }.bind(this));
     }
   }
 });

@@ -25,18 +25,16 @@ $this->registerJsVar("data", [
     {text:'<?php echo '<?=$this->title?>'; ?>', active:true}
 ]"></b-breadcrumb>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    <div class="card mb-5">
-        <div class="card-body">
-            <button class="btn btn-outline-primary mb-3" @click="changeType()" v-if="type !== 'create'">{{type==="update" ? "查看" : "编辑"}}</button>
-            <div v-if="type==='view'">
-                <detail class="table table-bordered table-striped table-hover" :model="model" :columns="columns">
-                </detail>
-            </div>
-            <div v-else>
-                <?='<?='?> $this->render('_form'); <?="?>\n"; ?>
-            </div>
+    <b-card class="mb-5">
+        <button class="btn btn-outline-primary mb-3" @click="changeType()" v-if="type !== 'create'">{{type==="update" ? "查看" : "编辑"}}</button>
+        <div v-if="type==='view'">
+            <detail class="table table-bordered table-striped table-hover" :model="model" :columns="columns">
+            </detail>
         </div>
-    </div>
+        <div v-else>
+            <?='<?='?> $this->render('_form'); <?="?>\n"; ?>
+        </div>
+    </b-card>
     <div class="page-loading-container" v-if="isLoading">
         <div class="page-loading">加载中…</div>
     </div>

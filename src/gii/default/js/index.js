@@ -61,7 +61,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 method: 'POST',
             }, function() {
                 this.dp.remove(model);
-            })
+            }.bind(this));
         }
     }
   }
