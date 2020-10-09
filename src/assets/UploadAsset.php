@@ -12,6 +12,6 @@ class UploadAsset extends AssetBundle
         'upload.js',
     ];
     public $depends = [
-        '\ethercap\ledap\assets\AppAsset',
+        '\ethercap\ledap\assets\LedapAsset',
     ];
 }
