@@ -66,7 +66,7 @@ ledap.App.getTheme().addComponent({
                             break;
                         }
                     }
-                });
+                }.bind(this));
             }
         }
     },
