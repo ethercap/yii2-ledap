@@ -6,7 +6,6 @@
     "license": "BSD-3-Clause",
     "require": {
         "ethercap/yii2-api-base": "@dev",
-        "npm-asset/ledap" : "^0.1.8",
         "npm-asset/ledap-vue-bootstrap" : "^0.0.4",
         "ethercap/common" : "@dev"
     },

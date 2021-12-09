@@ -6,9 +6,11 @@ use yii\web\AssetBundle;
 
 class LedapAsset extends AssetBundle
 {
-    public $sourcePath = "@npm/ledap/dist";
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+
     public $js = [
-        YII_DEBUG ? 'ledap.js' : 'ledap.min.js',
+        '//cdn.jsdelivr.net/npm/ledap@0.1.10/dist/ledap' . (YII_DEBUG ? '' : '.min') . '.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\VueAsset',
