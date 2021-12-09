@@ -6,11 +6,13 @@ use yii\web\AssetBundle;
 
 class BootstrapAsset extends AssetBundle
 {
-    public $sourcePath = "@npm/bootstrap/dist";//__DIR__.'/static/lib/bootstrapvue/';
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+
     public $js = [
     ];
     public $css = [
-        YII_DEBUG ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+        '//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap' . (YII_DEBUG ?: '.min') . '.css',
     ];
     public $depends = [
     ];
