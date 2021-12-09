@@ -12,7 +12,7 @@ class BootstrapAsset extends AssetBundle
     public $js = [
     ];
     public $css = [
-        '//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap' . (YII_DEBUG ?: '.min') . '.css',
+        '//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap' . (YII_DEBUG ? '' : '.min') . '.css',
     ];
     public $depends = [
     ];
