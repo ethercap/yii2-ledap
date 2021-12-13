@@ -10,7 +10,7 @@ class FontAwesomeAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
-        '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css',
+        '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css',
         '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
