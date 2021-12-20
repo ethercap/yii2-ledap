@@ -6,13 +6,11 @@ use yii\web\AssetBundle;
 
 class FontAwesomeAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $sourcePath = __DIR__ . '/static/npm';
+    public $sourcePath = __DIR__ . '/static';
 
     public $css = [
-        'fontawesome-free@5.15.4/css/all.min.css',
-        'font-awesome@4.7.0/css/font-awesome.min.css',
+        'npm/fontawesome-free@5.15.4/css/all.min.css',
+        'npm/font-awesome@4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
     ];

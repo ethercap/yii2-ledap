@@ -6,15 +6,13 @@ use yii\web\AssetBundle;
 
 class BootstrapAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
 
-    public $sourcePath = __DIR__ . '/static/npm/bootstrap@4.4.1';
+    public $sourcePath = __DIR__ . '/static';
 
     public $js = [
     ];
     public $css = [
-        'css/bootstrap.min.css',
+        'npm/bootstrap@4.4.1/css/bootstrap.min.css',
     ];
     public $depends = [
     ];

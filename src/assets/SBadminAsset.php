@@ -9,12 +9,10 @@ use yii\web\AssetBundle;
  **/
 class SBadminAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $sourcePath = __DIR__ . '/static/npm/startbootstrap-sb-admin-2@4.0.7';
+    public $sourcePath = __DIR__ . '/static';
 
     public $css = [
-        'css/sb-admin-2.min.css',
+        'npm/startbootstrap-sb-admin-2@4.0.7/css/sb-admin-2.min.css',
     ];
     public $js = [
     ];
