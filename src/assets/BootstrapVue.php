@@ -6,13 +6,13 @@ use yii\web\AssetBundle;
 
 class BootstrapVue extends AssetBundle
 {
-    public $sourcePath = __DIR__ . '/static';
+    public $sourcePath = __DIR__ . '/static/npm/bootstrap-vue@2.11.0';
 
     public $js = [
-        'npm/bootstrap-vue@2.11.0/bootstrap-vue.min.js',
+        'bootstrap-vue.min.js',
     ];
     public $css = [
-        'npm/bootstrap-vue@2.11.0/bootstrap-vue.min.css',
+        'bootstrap-vue.min.css',
     ];
     public $depends = [
         '\ethercap\ledap\assets\VueAsset',
