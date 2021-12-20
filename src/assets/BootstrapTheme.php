@@ -16,7 +16,7 @@ class BootstrapTheme extends AssetBundle
         'ledap-vue-bootstrap.css',
     ];
     public $js = [
-        'ledap-vue-bootstrap.umd.min.js',
+        'ledap-vue-bootstrap.umd' . (YII_DEBUG ? '' : '.min') . '.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',
