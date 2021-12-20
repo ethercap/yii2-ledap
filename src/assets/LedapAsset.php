@@ -8,9 +8,10 @@ class LedapAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public $sourcePath = __DIR__ . '/static/npm/ledap@0.1.10';
 
     public $js = [
-        '//cdn.jsdelivr.net/npm/ledap@0.1.10/dist/ledap' . (YII_DEBUG ? '' : '.min') . '.js',
+        'ledap.min.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\VueAsset',

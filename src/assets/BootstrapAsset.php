@@ -9,10 +9,12 @@ class BootstrapAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
 
+    public $sourcePath = __DIR__ . '/static/npm/bootstrap@4.4.1';
+
     public $js = [
     ];
     public $css = [
-        '//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap' . (YII_DEBUG ? '' : '.min') . '.css',
+        'css/bootstrap.min.css',
     ];
     public $depends = [
     ];

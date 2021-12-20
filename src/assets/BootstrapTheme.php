@@ -12,11 +12,13 @@ class BootstrapTheme extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public $sourcePath = __DIR__ . '/static/npm/ledap-vue-bootstrap@0.0.4';
+
     public $css = [
-        '//cdn.jsdelivr.net/npm/ledap-vue-bootstrap@0.0.4/lib/ledap-vue-bootstrap.css',
+        'ledap-vue-bootstrap.css',
     ];
     public $js = [
-        '//cdn.jsdelivr.net/npm/ledap-vue-bootstrap@0.0.4/lib/ledap-vue-bootstrap.umd' . (YII_DEBUG ? '' : '.min') . '.js',
+        'ledap-vue-bootstrap.umd.min.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\LedapAsset',

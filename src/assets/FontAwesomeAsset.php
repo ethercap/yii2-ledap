@@ -8,10 +8,11 @@ class FontAwesomeAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public $sourcePath = __DIR__ . '/static/npm';
 
     public $css = [
-        '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css',
-        '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css',
+        'fontawesome-free@5.15.4/css/all.min.css',
+        'font-awesome@4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
     ];
