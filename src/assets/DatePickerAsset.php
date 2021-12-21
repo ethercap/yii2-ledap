@@ -6,9 +6,9 @@ use yii\web\AssetBundle;
 
 class DatePickerAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__.'/static';
+    public $sourcePath = __DIR__.'/static/npm/vue2-datepicker@2.12.0';
     public $js = [
-        '//unpkg.com/vue2-datepicker@2.12.0/lib/index.js',
+        'vue2-datepicker.js',
     ];
     public $depends = [
         '\ethercap\ledap\assets\VueAsset',

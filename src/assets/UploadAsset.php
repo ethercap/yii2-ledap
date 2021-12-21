@@ -8,7 +8,7 @@ class UploadAsset extends AssetBundle
 {
     public $sourcePath = __DIR__.'/static';
     public $js = [
-        '//unpkg.com/vue-upload-component@2.8.20/dist/vue-upload-component.js',
+        'npm/vue-upload-component@2.8.20/vue-upload-component.js',
         'upload.js',
     ];
     public $depends = [

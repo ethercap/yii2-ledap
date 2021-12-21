@@ -6,14 +6,12 @@ use yii\web\AssetBundle;
 
 class VueAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-
+    public $sourcePath = __DIR__ . '/static/npm/vue@2.6.14';
     public $css = [
     ];
 
     public $js = [
-        YII_DEBUG ? '//cdn.jsdelivr.net/npm/vue@2/dist/vue.js' : '//cdn.jsdelivr.net/npm/vue@2',
+        YII_DEBUG ? 'vue.js' : 'vue.min.js',
     ];
     public $depends = [
     ];
