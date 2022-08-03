@@ -33,7 +33,7 @@ class Bootstrap implements BootstrapInterface
                     ],
                 ],
             ];
-            $app->getModule('gii')->generators = array_merge($app->getModule('gii')->generators, $config);
+            $app->getModule('gii')->generators = array_merge($config, $app->getModule('gii')->generators);
         }
     }
 }
