@@ -6,13 +6,12 @@ use yii\web\AssetBundle;
 
 /**
  * Main frontend application asset bundle.
- **/
+ * sb-admin bootstrap模板
+ * */
 class SBadminAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__ . '/static/npm/startbootstrap-sb-admin-2@4.0.7';
-
     public $css = [
-        'css/sb-admin-2.min.css',
+        '//cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.css',
     ];
     public $js = [
     ];
