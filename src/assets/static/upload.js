@@ -14,6 +14,10 @@ ledap.App.getTheme().addComponent({
             type: Boolean,
             default: true
         },
+        inputId: {
+            type: String,
+            default: 'file',
+        }, 
         headers: Object,
         data: Object,
         accept: {
@@ -204,6 +208,7 @@ ledap.App.getTheme().addComponent({
         <file-upload
           class="btn btn-primary dropdown-toggle"
           v-model="files"
+          :input-id="inputId"
           :post-action="postAction"
           :multiple="multiple"
           :headers="headers"
