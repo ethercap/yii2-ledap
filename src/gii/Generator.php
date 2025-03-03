@@ -2,8 +2,9 @@
 
 namespace ethercap\ledap\gii;
 
-use yii\gii\CodeFile;
 use Yii;
+use yii\gii\CodeFile;
+use yii\helpers\StringHelper;
 
 class Generator extends \yii\gii\generators\crud\Generator
 {
@@ -53,7 +54,19 @@ class Generator extends \yii\gii\generators\crud\Generator
             return Yii::getAlias($alias.'/web/js/'. $this->getControllerID());
         }
 
-        return Yii::getAlias(str_replace('\\', '/', $this->jsPath));
+        $path = Yii::getAlias(str_replace('\\', '/', $this->jsPath));
+        if (!StringHelper::endsWith($path, '/')) {
+            $path = $path.'/';
+        }
+        $ends = '';
+        if ($this->moduleId) {
+            $ends = $this->moduleId.'/';
+        }
+        $ends .= $this->getControllerID().'/';
+        if (!StringHelper::endsWith($path, $ends)) {
+            $path = $path.$ends;
+        }
+        return $path;
     }
 
     public function generate()
@@ -70,7 +83,7 @@ class Generator extends \yii\gii\generators\crud\Generator
         $jsPath = $this->getJsPath();
         $templatePath = $this->getTemplatePath() . '/js';
         foreach (scandir($templatePath) as $file) {
-            if (is_file($templatePath . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'js') {
+            if (is_file($templatePath . '/' . $file) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['js', 'jsx'])) {
                 $files[] = new CodeFile("$jsPath/$file", $this->render("js/$file"));
             }
         }
